@@ -265,24 +265,42 @@ address + "\n" +
 
   previewEl.value = buildLetter();
 
-  // --- Counter: local, client-side only (no backend, no personal data) ---
-  // Counts clicks of the send buttons on this browser only.
-  var COUNTER_KEY = "article32_petition_clicks_v1";
+  // --- Counter: real global count, stored in a locked-down Supabase table. ---
+  // The public key below can only call the two RPC functions below (increment/read
+  // a single counter row) — direct table access is blocked by row-level security.
+  // Falls back to a local, per-browser count if the network call fails.
+  var COUNTER_URL = "https://jxepqgkichouxggmagtr.supabase.co";
+  var COUNTER_KEY_PUBLIC = "sb_publishable_MFOYicNh8pYltDpZiZaFQw_xwFmzI6S";
+  var LOCAL_FALLBACK_KEY = "article32_petition_clicks_v1";
 
-  function getCount(){
-    var v = parseInt(localStorage.getItem(COUNTER_KEY), 10);
-    return isNaN(v) ? 0 : v;
-  }
-  function renderCounter(){
-    var n = getCount();
+  function setLabel(n){
     $("counterNum").textContent = n.toLocaleString();
     $("counterLabel").textContent = n === 1 ? "person has clicked send" : "people have clicked send";
   }
-  function incrementCounter(){
-    localStorage.setItem(COUNTER_KEY, String(getCount() + 1));
-    renderCounter();
+
+  function localFallbackCount(){
+    var v = parseInt(localStorage.getItem(LOCAL_FALLBACK_KEY), 10);
+    return isNaN(v) ? 0 : v;
   }
-  renderCounter();
+
+  function callCounterRpc(fn){
+    return fetch(COUNTER_URL + "/rest/v1/rpc/" + fn, {
+      method: "POST",
+      headers: {
+        "apikey": COUNTER_KEY_PUBLIC,
+        "Authorization": "Bearer " + COUNTER_KEY_PUBLIC,
+        "Content-Type": "application/json"
+      },
+      body: "{}"
+    }).then(function(res){
+      if(!res.ok) throw new Error("counter request failed");
+      return res.json();
+    });
+  }
+
+  callCounterRpc("get_petition_counter")
+    .then(function(n){ setLabel(n); })
+    .catch(function(){ setLabel(localFallbackCount()); });
 
   function sendLetter(e){
     e.preventDefault();
@@ -290,7 +308,15 @@ address + "\n" +
     var mailto = "mailto:" + encodeURIComponent(RECIPIENTS.join(","))
       + "?subject=" + encodeURIComponent(SUBJECT)
       + "&body=" + encodeURIComponent(body);
-    incrementCounter();
+
+    callCounterRpc("increment_petition_counter")
+      .then(function(n){ setLabel(n); })
+      .catch(function(){
+        var n = localFallbackCount() + 1;
+        localStorage.setItem(LOCAL_FALLBACK_KEY, String(n));
+        setLabel(n);
+      });
+
     window.location.href = mailto;
   }
 
