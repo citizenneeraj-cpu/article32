@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stand With the Students — Article 32 Petition</title>
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --paper:#ffffff;
+    --bg:#f4f2ee;
+    --accent:#8c1c1c;
+    --accent-dark:#6b1414;
+    --muted:#5a5a5a;
+    --border:#d8d3ca;
+    --focus:#2b5a8c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ink:#eee9e2;
+      --paper:#201d1a;
+      --bg:#141210;
+      --accent:#e26a6a;
+      --accent-dark:#f08a8a;
+      --muted:#b3aca2;
+      --border:#3a352f;
+      --focus:#7fb2e8;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:24px 20px 60px;
+  }
+  header.hero{
+    text-align:center;
+    padding:32px 0 20px;
+  }
+  h1{
+    font-size:1.9rem;
+    line-height:1.25;
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:1.02rem;
+    max-width:56ch;
+    margin:0 auto 24px;
+  }
+  .cta{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:14px 28px;
+    font-size:1.05rem;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+  .cta:hover{ background:var(--accent-dark); }
+  .cta:focus-visible{ outline:3px solid var(--focus); outline-offset:2px; }
+  .counter{
+    margin-top:16px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .counter strong{ color:var(--ink); }
+
+  section{
+    margin-top:36px;
+    background:var(--paper);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+  }
+  section h2{
+    font-size:1.05rem;
+    margin:0 0 14px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--muted);
+  }
+
+  .letter-box{
+    margin-top:22px;
+  }
+  textarea#letterPreview{
+    width:100%;
+    min-height:480px;
+    padding:20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:0.98rem;
+    line-height:1.7;
+    color:var(--ink);
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    resize:vertical;
+    white-space:pre-wrap;
+  }
+  .hint{
+    font-size:0.8rem;
+    color:var(--muted);
+    margin-top:8px;
+  }
+
+  .send-row{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .send-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    background:var(--accent);
+    color:#fff;
+    padding:16px;
+    font-size:1.05rem;
+    font-weight:700;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .send-btn:hover{ background:var(--accent-dark); }
+  .send-btn:disabled{
+    background:var(--border);
+    color:var(--muted);
+    cursor:not-allowed;
+  }
+  .recipients{
+    font-size:0.78rem;
+    color:var(--muted);
+    word-break:break-word;
+  }
+
+  .transparency{
+    margin-top:28px;
+    border-left:3px solid var(--accent);
+    padding:14px 16px;
+    background:transparent;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .transparency strong{ color:var(--ink); }
+
+  footer{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    font-size:0.78rem;
+    color:var(--muted);
+    text-align:center;
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Stand With the Students.<br/>Demand Accountability.</h1>
+    <p class="sub">For 20 days, students across India have peacefully protested exam scams, unemployment, and a broken system. On July 20, Delhi Police responded with batons and tear gas — against unarmed young people, including minors.</p>
+    <a href="#" class="cta" id="topSendBtn">Send a Letter Petition to the Supreme Court</a>
+    <div class="counter">
+      <strong id="counterNum">—</strong> <span id="counterLabel">people have clicked send</span>
+    </div>
+  </header>
+
+  <section class="letter-box">
+    <h2>Preview Your Letter</h2>
+    <textarea id="letterPreview" spellcheck="false"></textarea>
+    <p class="hint">Fill in your name, address, phone, and email where indicated in brackets. You may lightly edit the rest of the text if you wish before sending.</p>
+
+    <div class="send-row">
+      <a href="#" class="send-btn" id="sendBtn">Send via My Email App</a>
+      <p class="recipients">Recipients: pil-cell@sci.nic.in, section.pil@sci.nic.in, pil.english@sci.nic.in, pil.writ@sci.nic.in, supremecourt@nic.in</p>
+    </div>
+  </section>
+
+  <div class="transparency">
+    <strong>How this works:</strong> Clicking "Send" opens your own email app (Gmail, Outlook, Mail, etc.) with the letter and recipient addresses already filled in. Nothing is sent automatically, and this site does not collect, transmit, or store any personal data you enter — it stays in your browser only.
+  </div>
+
+  <footer>
+    This tool helps you send a pre-drafted petition. It is not legal advice. For a Public Interest Litigation, consult a lawyer or Advocate-on-Record.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var RECIPIENTS = [
+    "pil-cell@sci.nic.in",
+    "section.pil@sci.nic.in",
+    "pil.english@sci.nic.in",
+    "pil.writ@sci.nic.in",
+    "supremecourt@nic.in"
+  ];
+
+  var SUBJECT = "Letter Petition Under Article 32 - URGENT INTERVENTION REQUIRED FOR VIOLATION OF FUNDAMENTAL RIGHTS (Articles 19 & 20)";
+
+  function todayFormatted(){
+    var d = new Date();
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+  }
+
+  function buildLetter(){
+    var name = "[Your Name]";
+    var address = "[Your Address]";
+    var phone = "[Your Phone]";
+    var email = "[Your Email]";
+    var date = todayFormatted();
+
+    return (
+"To,\n" +
+"The Hon'ble Chief Justice of India\n" +
+"and Companion Judges of the Supreme Court of India\n" +
+"Supreme Court of India, Tilak Marg\n" +
+"New Delhi - 110001\n\n" +
+"Date: " + date + "\n\n" +
+"Subject: Letter Petition Under Article 32 - URGENT INTERVENTION REQUIRED FOR VIOLATION OF FUNDAMENTAL RIGHTS (Articles 19 & 20)\n\n" +
+"Most Respectfully,\n\n" +
+"1. That the present letter petition is being addressed to this Hon'ble Court invoking its jurisdiction under Article 32 of the Constitution of India, seeking urgent intervention against the excessive and disproportionate use of force by the Delhi Police against students and youth who have been peacefully protesting for the past twenty (20) days.\n\n" +
+"2. That the said protests, led primarily by student organisations and youth groups, have been conducted in exercise of the fundamental rights guaranteed under Article 19(1)(a) [freedom of speech and expression] and Article 19(1)(b) [right to assemble peaceably and without arms] of the Constitution of India. The protestors have been raising concerns regarding alleged irregularities in national-level examinations, unemployment, and related grievances, and demanding accountability from the concerned authorities.\n\n" +
+"3. That on 20 July 2026, thousands of students and young persons assembled near Jantar Mantar and attempted to march towards Parliament as part of the ongoing demonstration. It is submitted that the assembly was overwhelmingly peaceful in character.\n\n" +
+"4. That despite the peaceful nature of the protest, Delhi Police personnel resorted to lathi-charge (baton charge) and the use of tear gas shells against the protestors, including students. Visual evidence widely circulated in the media and on social platforms shows police personnel striking demonstrators, including individuals who had already fallen to the ground. Several protestors, including minors and women, are reported to have sustained injuries, including head and limb injuries, requiring medical attention.\n\n" +
+"5. That such use of force against unarmed and peaceful protestors amounts to a violation of Article 21 of the Constitution, which guarantees the right to life and personal liberty, including the right to live with dignity and to be free from custodial or crowd-control violence disproportionate to the situation.\n\n" +
+"6. That the imposition of restrictions such as suspension of mobile internet services in parts of central Delhi and closure of Metro stations prior to the protest, without demonstrated necessity or proportionality, raises further concern regarding the curtailment of the fundamental rights of citizens under Article 19.\n\n" +
+"7. That the right to peaceful protest and dissent is a well-recognised facet of the fundamental rights guaranteed under Part III of the Constitution, and has been affirmed by this Hon'ble Court in several judgments, including Ramlila Maidan Incident, In re (2012) and Anuradha Bhasin v. Union of India (2020), wherein this Hon'ble Court has held that the right to peaceful assembly must be balanced against reasonable restrictions, and that force used by law enforcement must be proportionate and as a measure of last resort.\n\n" +
+"8. That in light of the above, it is most respectfully prayed that this Hon'ble Court may be pleased to:\n\n" +
+"   a) Treat this letter petition as a Public Interest Litigation under Article 32 of the Constitution of India;\n\n" +
+"   b) Direct an independent inquiry into the incidents of alleged police brutality against student protestors on 20 July 2026;\n\n" +
+"   c) Direct that appropriate medical treatment, compensation, and legal redress be provided to the injured protestors;\n\n" +
+"   d) Issue appropriate guidelines to the Delhi Police regarding the proportionate use of force during peaceful protests and demonstrations, in line with established constitutional principles;\n\n" +
+"   e) Pass any other order(s) as this Hon'ble Court may deem fit and proper in the interest of justice.\n\n" +
+"9. That this petition is made bona fide and in the interest of justice.\n\n" +
+"With utmost respect,\n\n" +
+name + "\n" +
+address + "\n" +
+"Phone: " + phone + "\n" +
+"Email: " + email
+    );
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var previewEl = $("letterPreview");
+
+  previewEl.value = buildLetter();
+
+  // --- Counter: local, client-side only (no backend, no personal data) ---
+  // Counts clicks of the send buttons on this browser only.
+  var COUNTER_KEY = "article32_petition_clicks_v1";
+
+  function getCount(){
+    var v = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+    return isNaN(v) ? 0 : v;
+  }
+  function renderCounter(){
+    var n = getCount();
+    $("counterNum").textContent = n.toLocaleString();
+    $("counterLabel").textContent = n === 1 ? "person has clicked send" : "people have clicked send";
+  }
+  function incrementCounter(){
+    localStorage.setItem(COUNTER_KEY, String(getCount() + 1));
+    renderCounter();
+  }
+  renderCounter();
+
+  function sendLetter(e){
+    e.preventDefault();
+    var body = previewEl.value;
+    var mailto = "mailto:" + encodeURIComponent(RECIPIENTS.join(","))
+      + "?subject=" + encodeURIComponent(SUBJECT)
+      + "&body=" + encodeURIComponent(body);
+    incrementCounter();
+    window.location.href = mailto;
+  }
+
+  $("topSendBtn").addEventListener("click", sendLetter);
+  $("sendBtn").addEventListener("click", sendLetter);
+
+})();
+</script>
+</body>
+</html>
